@@ -1,0 +1,158 @@
+ASxxxx Assembler V05.06+  (ASxxxx Test Assembler)                       Page 1
+Hexadecimal [16-Bits]                                 Thu Aug 14 08:59:32 2014
+ASXSCN Scanner Testing
+
+
+                              1 	.title	ASXSCN Scanner Testing
+                              2 
+                              3 	.area	A	(rel,con)
+                              4 
+   0000                       5 	100$:
+   0000                       6 	101$:	.blkb	0x10
+   0010                       7 		.blkb	0x10
+   0020 00 01 02 03           8 		.byte	0,1,2,3
+   0024                       9 		.blkb	0x20
+                             10 
+   0044r44                   11 	byte0:	.byte	#byte0
+   0045r45                   12 	byte1:	.byte	#byte1
+   0046r46                   13 	byte2:	.byte	#byte2
+   0047r47                   14 	byte3:	.byte	#byte3
+   0048r48                   15 	byte4:	.byte	#byte4
+   0049r49                   16 	byte5:	.byte	#byte5
+   004Ar4A                   17 	byte6:	.byte	#byte6
+   004Br4B                   18 	byte7:	.byte	#byte7
+   004Cr4C                   19 	byte8:	.byte	#byte8
+   004Dr4D                   20 	byte9:	.byte	#byte9
+   004Er4E                   21 	byteA:	.byte	#byteA
+   004Fr4F                   22 	byteB:	.byte	#byteB
+   0050r50                   23 	byteC:	.byte	#byteC
+   0051r51                   24 	byteD:	.byte	#byteD
+   0052r52                   25 	byteE:	.byte	#byteE
+   0053r53                   26 	byteF:	.byte	#byteF
+   0054 00 01 02 03 04 05    27 		.byte	0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+        06 07 08 09 0A 0B
+        0C 0D 0E 0F
+                             28 
+   0064                      29 	byte10:
+
+
+                             34 ;	.list (!,err,loc,bin,eqt,cyc,lin,src)
+   0064 00            [ 0]   36 	0$:	.opcode	0
+                     0044    37 		code = #byte0
+                             38 
+                             40 ;	.list (!,err,loc,bin,eqt,cyc,lin)
+   0065 01            [ 1]   42
+                     0045    43
+                             44
+                             46 ;	.list (!,err,loc,bin,eqt,cyc)
+   0066 02            [ 2]
+                     0046
+
+                             52 ;	.list (!,err,loc,bin,eqt)
+   0067 03
+                     0047
+
+                             58 ;	.list (!,err,loc,bin)
+   0068 04
+
+
+                             64 ;	.list (!,err,loc)
+   0069
+
+
+                             70 ;	.list (!,err)
+
+
+
+                             76 	.area B
+                             77 
+   0000r00                   78 	byte20:	.byte	#byte20
+   0001r01                   79 	byte21:	.byte	#byte21
+   0002r02                   80 	byte22:	.byte	#byte22
+   0003r03                   81 	byte23:	.byte	#byte23
+   0004r04                   82 	byte24:	.byte	#byte24
+   0005r05                   83 	byte25:	.byte	#byte25
+   0006r06                   84 	byte26:	.byte	#byte26
+   0007r07                   85 	byte27:	.byte	#byte27
+   0008r08                   86 	byte28:	.byte	#byte28
+   0009r09                   87 	byte29:	.byte	#byte29
+   000Ar0A                   88 	byte2A:	.byte	#byte2A
+   000Br0B                   89 	byte2B:	.byte	#byte2B
+   000Cr0C                   90 	byte2C:	.byte	#byte2C
+   000Dr0D                   91 	byte2D:	.byte	#byte2D
+   000Er0E                   92 	byte2E:	.byte	#byte2E
+   000Fr0F                   93 	byte2F:	.byte	#byte2F
+   0010 00 01 02 03 04 05    94 		.byte	0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+        06 07 08 09 0A 0B
+        0C 0D 0E 0F
+                             95 
+   0020                      96 	byte30:
+
+
+                            101 ;	.list (!,loc,bin,eqt,cyc,lin,src)
+   0020 00            [ 0]  103 	10$:	.opcode	0
+                     0044   104 		code = #byte0
+                     0000   105 		code = #byte20
+   0021                     106 	20$:
+                            107 
+                            109 ;	.list (!,bin,eqt,cyc,lin,src)
+        01            [ 1]  111 	11$:	.opcode	1
+                     0045   112 		code = #byte1
+                     0001   113 		code = #byte21
+                            114 	21$:
+                            115 
+                            117 ;	.list (!,loc,eqt,cyc,lin,src)
+   0022               [ 2]  119 	12$:	.opcode	2
+                     0046   120 		code = #byte2
+                     0002   121 		code = #byte22
+   0023                     122 	22$:
+                            123 
+                            125 ;	.list (!,loc,bin,cyc,lin,src)
+   0023 03            [ 3]  127 	13$:	.opcode	3
+                            128 		code = #byte3
+                            129 		code = #byte23
+   0024                     130 	23$:
+                            131 
+                            133 ;	.list (!,loc,bin,eqt,lin,src)
+   0024 04                  135 	14$:	.opcode	4
+                     0048   136 		code = #byte4
+                     0004   137 		code = #byte24
+   0025                     138 	24$:
+                            139 
+                            141 ;	.list (!,loc,bin,eqt,cyc,src)
+   0025 05            [ 5]      	15$:	.opcode	5
+                     0049       		code = #byte5
+                     0005       		code = #byte25
+   0026                         	25$:
+                                
+                            149 		.globl	byte40
+r                    0000   150 		cddd = byte40
+r                    0000   151 		cdde = byte41
+                     0026   152 		cddf = .
+                     0028   153 		cddj = . + 2
+                     0024   154 		cddj = . - 2
+   0026s00r26               155 		.word	cddf
+                     0002   156 		cddg = 2
+                            157 
+                            158 	.area	A
+                            159 
+   006Bs00r6B               160 		.word	.
+                     0002   161 	a = 2
+                     006D   162 	b = .
+                     008F   163 	c = .+34
+                     006F   164 	d = c-32
+                            165 
+                            166 	.area	B
+                            167 
+                     0002   168 	j = 2
+                            169 
+                     0028   170 	k = .
+                            171 		;
+                     004A   172 	l = .+34
+                            173 
+                            174 		;
+
+                     002A   178 	m = l-32
+                            179 
+                            180 	;as:
+                            181 

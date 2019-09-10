@@ -1,0 +1,30 @@
+82569
+R:\ASXV5PXX\ASXMAK\SYMANTEC\BUILD\asz280.prj
+asz280.OPN
+novcs
+asz280.DEF
+6
+1539728253
+0 0 0 0 0 "..\..\..\ASXXSRC\asdata.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\asdbg.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\asexpr.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\aslex.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\aslist.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\asmain.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\asmcro.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\asout.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\assubr.c"
+0 0 0 0 0 "..\..\..\ASXXSRC\assym.c"
+0 0 0 0 0 "..\..\..\ASZ280\z280adr.c"
+0 0 0 0 0 "..\..\..\ASZ280\z280mch.c"
+0 0 0 0 0 "..\..\..\ASZ280\z280pst.c"
+0 0 0 0 0 "asz280.DEF"
+0 -1 0 0 0 "..\..\..\ASXXSRC\asxxxx.h"
+0 -1 0 0 0 "C:\SC\INCLUDE\stdlib.h"
+0 -1 0 0 0 "C:\SC\INCLUDE\stdio.h"
+0 -1 0 0 0 "C:\SC\INCLUDE\setjmp.h"
+0 -1 0 0 0 "C:\SC\INCLUDE\string.h"
+0 -1 0 0 0 "C:\SC\INCLUDE\time.h"
+0 -1 0 0 0 "..\..\..\ASZ280\z280def.h"
+0 -1 0 0 0 "..\..\..\ASZ280\z280opcy.h"
+0 -1 0 0 0 "..\..\..\ASZ280\z280ops.h"

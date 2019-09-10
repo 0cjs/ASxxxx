@@ -1,0 +1,19 @@
+-xu
+t78k0
+t78k0
+-g xsfrFF = 0xFF00
+-g xsaddrFE = 0xFE00
+-g xsaddrFF = 0xFF00
+-g xbt = 0x00
+-g xaddr11 = 0x0000
+-g xaddr16 = 0x0000
+-g xbt0 = 0
+-g xbt1 = 0
+-g xbt2 = 0
+-g xbt3 = 0
+-g xbt4 = 0
+-g xbt5 = 0
+-g xbt6 = 0
+-g xbt7 = 0
+-g xnd = 0x00
+-e

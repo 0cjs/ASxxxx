@@ -1,0 +1,18 @@
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 1
+Hexadecimal [16-Bits]                                 Mon Jan  9 08:40:37 2017
+Linux Path Tests
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 2
+Hexadecimal [16-Bits]                                 Mon Jan  9 08:40:37 2017
+Linux Path Tests
+Area Table
+
+[_CSEG]
+   0 _CODE            size   18   flags C180
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

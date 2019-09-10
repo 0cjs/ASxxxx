@@ -1,0 +1,416 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#C0C0C0">
+
+<A href="../home.htm">
+<IMG width=343 height=58 border=0 SRC="welcom.gif" ALT="Welcome"></A>
+
+<H2>AS8X300  Assembler</H2>
+
+<A NAME = "TOP"> </A> 
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+   The  AS8X300 assembler supports the 8X300 and 8X305 microcon-
+trollers with the basic  syntax  of  the  MCCAP  Microcontroller
+Cross  Assembler  Program.   The  8x300 microcontroller has just
+eight basic instructions, MOVE, ADD, AND, XOR, XMIT,  NZT,  XEC,
+and  JMP.  The 8x305 has two addition instruction mnemonics, XML
+and XMR.  Three additional mnemonics are common to the 8X300 and
+8X305,  HALT, NOP, and SEL.  These five instructions are derived
+from the basic instructions.  
+
+   The  CALL and RTN functionalities are provided by macros con-
+tained in the s8xmcros.asm macro library.  These  functions  and
+others  in  the  library will be discussed in the following sec-
+tions.  
+</PRE></B></H4>
+
+<H4><B><PRE>
+PROCESSOR SPECIFIC DIRECTIVES 
+
+.8x300 Directive 
+
+Format:  
+
+        .8x300 
+
+The  default microcontroller selection is the 8x300.  The .8x300
+directive explicitly selects  coding  for  the  8x300  microcon-
+troller.  
+
+
+.8x305 Directive 
+
+Format:  
+
+        .8x305 
+
+The  default microcontroller selection is the 8x300.  The .8x305
+directive explicitly selects  coding  for  the  8x305  microcon-
+troller.  
+
+
+.liv Directive 
+
+Format:  
+
+        .liv    sym     byte,bit,length 
+
+The .liv declaration assigns a symbolic name to a left bank data
+field and defines the address (byte), position (bit), and preci-
+sion (length) of that variable.  
+
+
+.riv Directive 
+
+Format:  
+
+        .riv    sym     byte,bit,length 
+
+The  .riv  declaration  assigns  a symbolic name to a right bank
+data field and defines the address (byte), position  (bit),  and
+precision (length) of that variable.  
+
+
+.fdef Directive 
+
+Format:  
+
+        .fdef   n(v),n(v),...  
+
+The  .fdef  directive  is  used  to  specify  operand fields and
+default values for instruction extensions.   The  fields  define
+output  bit positions from MSB to LSB.  The directive may define
+up to 16 fields with a total length of 16 bits.  The  length  in
+bits  (n)  of each field is specified along with the an optional
+default field value (v) and an error checking flag (- preceeding
+n inhibits error checking).  
+
+
+.xtnd Directive 
+
+Format:  
+
+        .xtnd   [area] 
+
+The option to output instruction extension code requires the de-
+finition of an extension field by .fdef and  the  invocation  of
+.xtnd with a defined area.  The generated extension code will be
+placed in the extended code area with the same  address  as  the
+assembled  instruction.  Invoking the .xtnd directive without an
+area will disable the extension code output.  
+
+
+.xerr Directive 
+
+Format:  
+
+        .xerr [n] 
+
+
+   The expanded error directive outputs alternate error messages
+for the &lta&gt error at the commmand line and in the listing  files
+created by the assembler.  The modes are:  
+
+       .xerr [0]
+
+           Restores the default &lta&gt error reporting.
+
+       .xerr 1
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device.
+
+       .xerr 2
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device and also outputs an additional
+           &ltx&gt error describing the detected error.
+
+       .xerr 3
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device and also outputs an additional
+           &ltx&gt error describing the detected error.  The
+           additional &ltx&gt error describing the detected
+           error is inserted into the optional listing file.
+
+</PRE></B></H4>
+
+<H4><B><PRE>
+THE 8X300/8X305 MACRO LIBRARY 
+
+
+   The  macro  library,  s8xmcros.asm,  contains macros defining
+functionality not implemented directly into the assembler.  
+
+   The macros are:  
+
+        ORG     space, pgsize  ^/[...]/
+
+        PROC    sub
+        ENTRY   sub
+
+        CALL    sub     ^/[...]/
+        RTN     ^/[...]/
+
+        CALL_TABLE      area_c, area_x  ^/[...]/
+
+Where  the ^/[...]/ syntax passes the string "[...]" as an argu-
+ment of the macro.  
+
+
+ORG 
+
+Format:  
+
+        ORG     space, pgsize   ^/[...]/ 
+
+The  ORG  macro changes the value of the location counter either
+conditionally or unconditionally.  The first  form  of  the  ORG
+macro:  
+
+        ORG     address
+
+unconditionally changes the value of the location counter to the
+value indicated by "address" which is any  constant,  symbol  or
+expression which evaluates to a value between 1 and 8191.  
+
+   The second form of the ORG macro conditionally sets the loca-
+tion counter to the next page or segment boundary if  there  are
+insufficient locations (space) in the current page (pgsize = 32)
+or segment (pgsize = 256).  If there is insufficient space  then
+a jump instruction is inserted pointing to the next page/segment
+boundary.  
+
+        ORG     space, pgsize  ^/[...]/
+
+The  optional  extended  code, [...], will be output if the jump
+instruction is inserted.  
+
+   If  "space" is equal to "pgsize", this statement is an uncon-
+ditional alignment to the next boundary of length "pgsize".  
+
+
+PROC 
+
+Format:  
+
+        PROC    sub 
+
+The PROC macro creates the following code:  
+
+        .sbttl  sub:
+sub:
+
+
+ENTRY 
+
+Format:  
+
+        ENTRY   sub 
+
+The ENTRY macro creates the following code:  
+
+sub:
+
+
+CALL, RTN, and CALL_TABLE 
+
+   The  macro  functions  CALL,  RTN, and CALL_TABLE implement a
+subroutine calling convention.  The 8X300/8X305 microcontrollers
+donot  have  a stack to save the return addresses for subroutine
+calling or subroutine returns.  The subroutine  calling  conven-
+tion  uses  register r11 as an index into a table of return jump
+addresses created by cooperation between the CALL macro and  the
+CALL_TABLE  macro.   The  CALL macro creates a unique return ad-
+dress symbol each time the macro  is  invoked.   The  CALL_TABLE
+macro creates the return jump table which is appended to the end
+of the assembled code.  
+
+
+CALL
+
+Format:  
+
+        CALL    sub     ^/[...]/ 
+
+The CALL macro creates the following code:  
+
+        xmit    n,r11   [...]
+        jmp     sub     [...]
+
+and  a  symbol, .rtn.n which points to the instruction following
+the inserted code, where n is 0 for the  first  CALL  invocation
+and  is  incremented  by  1 for each successive CALL invocation.
+The extended instruction code, [...], is optional.  
+
+
+RTN
+
+Format:  
+
+        RTN     ^/[...]/ 
+
+The RTN macro creates the following code:  
+
+        jmp     .tbgn.  [...]
+
+where  .tbgn.   is  a label created by the macro CALL_TABLE when
+invoked at the end of the assembly.   The  table  return  index,
+r11,  will  select the proper return jump address entry from the
+jump table created by the CALL_TABLE macro.   The  extended  in-
+struction code, [...], is optional.  
+
+
+CALL_TABLE
+
+Format:  
+
+        CALL_TABLE      area_c,area_x   ^/[...]/ 
+
+'area_c'  specifies the code area where the return jump table is
+to be placed.  'area_x' specifies the code area where the exten-
+sion  data  is  to be placed.  CALL_TABLE can be invoked with no
+arguments to use the current code and extension  areas  and  the
+default extended code.  To create an empty argument use the con-
+struct ^// for the argument.  
+
+   The CALL_TABLE macro creates an entry for each CALL macro in-
+voked in the assembly program and produces the following code:  
+
+        xec     .+1(r11) [...]
+        jmp     .rtn.0  [...]
+        jmp     .rtn.1  [...]
+        jmp     .rtn.2  [...]
+        ... repeating for the
+            total number of CALLs
+</PRE></B></H4>
+
+<H4><B><PRE>
+8X300 AND 8X305 REGISTER SETS 
+
+The following is a list of the 8X300 and 8X305 registers used by
+AS8X300:  
+
+    Registers Common To The 8X300 and 8X305
+        r0,r1,r2,r3     -       8-bit registers
+        r4,r5,r6,r7
+        r10,r11
+        aux (= r0)
+        ivl (= r7)
+        ovf (= r10)
+        ivr (= r17)
+
+    Additional Registers Of The 8X305
+        r12,r13,r14,    -       8-bit registers
+        r15,r16
+
+    Register names containing multiple letters
+    must be all lower case or all upper case.
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+8X300 AND 8X305 INSTRUCTION SETS 
+
+   The  following  tables  list  all  8X300  and 8X305 mnemonics
+recognized by the AS8X300 assembler.  The following list  speci-
+fies the format for each addressing mode supported by AS8X300:  
+
+    Instruction Argument Syntax:
+
+        op      instruction mnemonic
+
+        reg     8X300/8X305 registers
+
+        s       source I/O data feild
+                register, .liv or .riv symbol, or constant
+
+        d       desination I/O data feild
+                register, .liv or .riv symbol, or constant
+
+        exp8    8-bit value
+
+        exp5    5-bit value
+
+        df      I/O data field (may be optional)
+
+        len     I/O field length (may be optional)
+
+        r       bit positions to rotate (may be optional)
+
+        addr    call or jump address or label
+
+        code    extension field patterns (optional)
+
+The terms reg, s, r, exp8, exp5, df, len, addr, and code may all
+be expressions.  
+
+   Note  that  not  all addressing modes may be valid with every
+instruction.  Refer to the 8X300/8X305 technical data for  valid
+modes.  
+
+</PRE></B></H4>
+
+<H4><B><PRE>
+Basic 8X300 and 8X305 Instructions
+    MOVE, ADD, AND, XOR - Data Manipulation
+        op      s,d             [code]
+        op      s(r),d          [code]
+        op      s,len,d         [code]
+
+    XMIT - Load Immediate
+        XMIT    exp8,reg        [code]
+        XMIT    exp5,df,len     [code]
+
+    XDEF - Execute
+        XEC     exp8(reg),size          [code]
+        XEC     exp5(df,len),size       [code]
+
+    NZT - Non-Zero Transfer
+        NZT     reg,exp8        [code]
+        NZT     df,len,exp5     [code]
+
+    JMP - Unconditional Jump
+        JMP     addr    [code]
+
+Aditional 8X305 Instructions
+    XML, XMR - Load Immediate To Left Or Right Bank
+        op      immed   [code]
+
+Common Derived Instructions
+    SEL, HALT, NOP - Derived Instructions
+        SEL     df      [code]
+        HALT            [code]
+        NOP             [code]
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H5><A HREF="asxdoc.htm#TOP"> Go to the Documentation Index</A></H5>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4>
+<P><A HREF="asxxxx.htm#JUMP">
+<IMG width=32 height=32 border=0 SRC="spcshp.gif" ALIGN=bottom></A>
+<B>...  Exit the ASxxxx Documentation</B></A></P>
+
+<P><A href="../home.htm">
+<IMG width=32 height=32 border=0 SRC="home.gif" ALIGN=bottom></A>
+<B>...  Home Page</B></P>
+</H4>
+
+<H6><P><B>Last Updated: January 2019</B></P></H6>
+</BODY> 
+</HTML>

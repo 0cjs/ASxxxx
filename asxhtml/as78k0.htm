@@ -1,0 +1,321 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#C0C0C0">
+
+<A href="../home.htm">
+<IMG width=343 height=58 border=0 SRC="welcom.gif" ALT="Welcome"></A>
+
+<H2>AS78K0  Assembler</H2>
+
+<A NAME = "TOP"> </A> 
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+PROCESSOR SPECIFIC DIRECTIVES 
+
+.setdp Directive 
+
+Format:  
+
+        .setdp [base [,area]] 
+
+The set direct page directive has a common format in all the as-
+semblers supporting a paged mode.  The .setdp directive is  used
+to  inform  the  AS78K0 assembler of the current SFR page region
+and the offset address within the selected area.  The normal in-
+vocation methods are:  
+
+       .area   SFR  (PAG)
+       .setdp
+
+       or
+
+       .setdp  0xFF00,SFR
+
+
+The  directives  specify that the direct page is in area SFR and
+its offset address is 0xFF00 (the only valid value for all r78k0
+microprocessor  variations).   Be  sure to place the SFR area at
+address 0xFF00 during linking.  When the base address  and  area
+are  not  specified,  then  0xFF00  and the current area are the
+defaults.  If a .setdp directive is  not  issued  the  assembler
+defaults the direct page to the area "CODE" at offset 0xFF00.  
+
+   The assembler verifies that any local variable used in an SFR
+variable reference is located in this area.  Local variable  and
+constant  value direct access addresses are checked to be within
+the address range from 0xFF00 to 0xFFFF.  
+
+   External SFR references are assumed by the assembler to be in
+the correct area and have valid offsets.  The linker will  check
+all SFR page relocations to verify that they are within the cor-
+rect area.  
+
+
+.xerr Directive 
+
+Format:  
+
+        .xerr [n] 
+
+
+   The expanded error directive outputs alternate error messages
+for the &lta&gt error at the commmand line and in the listing  files
+created by the assembler.  The modes are:  
+
+       .xerr [0]
+
+           Restores the default &lta&gt error reporting.
+
+       .xerr 1
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device.
+
+       .xerr 2
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device and also outputs an additional
+           &ltx&gt error describing the detected error.
+
+       .xerr 3
+
+           Replaces the &lta&gt error with the &ltx&gt error which
+           lists the source line containing the error on
+           the stdout device and also outputs an additional
+           &ltx&gt error describing the detected error.  The
+           additional &ltx&gt error describing the detected
+           error is inserted into the optional listing file.
+
+</PRE></B></H4>
+
+<H4><B><PRE>
+78K/0 REGISTER SET 
+
+The following is a list of the 78K/0 registers used by AS78K0:  
+
+       x(r0), a(r1),   8-bit registers
+       c(r2), b(r3),
+       e(r4), d(r5),
+       l(r6), h(r7)
+
+       ax(rp0),        16-bit registers
+       bc(rp1),
+       de(rp2),
+       hl(rp3)
+
+       rb0, rb1,       register bank selection
+       rb2, rb3
+
+       sp              Stack pointer
+       psw             Program status word
+       cy              Carry flag
+
+       Register names are NOT case sensitive.
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+78K/0 INSTRUCTION SET 
+
+   The  following  tables list all 78K/0 mnemonics recognized by
+the AS78K0 assembler.  The designation [] refers to  a  required
+addressing  mode  argument.  The first list specifies the format
+for each addressing mode supported by AS78K0:  
+
+        addr16          direct addressing
+                        via a 16-bit address
+
+        !addr16         immediate addressing
+                        only required for the
+                        long br instruction
+
+        addr11          direct addressing
+                        via an 11-bit address
+
+        [addr5]         indirect addressing
+                        via a 5-bit address
+
+        @saddr          short direct addressing
+                        0xFE20 &lt= saddr &lt= 0xFF1F
+
+        @saddr.bit      short direct addressing
+        @saddr,bit      with bit addressing (0-7)
+                        0xFE20 &lt= saddr &lt= 0xFF1F
+
+        *sfr            special function registers
+                        0xFF00 &lt= sfr &lt= 0xFFCF  or
+                        0xFFE0 &lt= sfr &lt= 0xFFFF
+
+        *sfr.bit        special function registers
+        *sfr,bit        wiht bit addressing (0-7)
+                        0xFF00 &lt= sfr &lt= 0xFFCF  or
+                        0xFFE0 &lt= sfr &lt= 0xFFFF
+
+        label           branch label
+                        (pc relative addressing)
+
+        #byte           immediate data (8  bit)
+        #word           immediate data (16 bit)
+
+        rn              registers (8 bit)
+                        x, a, c, b, e, d, l, h
+                        r0-r7
+
+        rpn             registers (16 bit)
+                        ax, bc, de, hl
+                        rp0-rp3
+
+        rbn             register bank
+                        rb0-rb3
+
+        sp              stack pointer
+
+        psw             program status register
+
+        cy              carry flag
+
+        [DE], [HL]      register indirect addressing
+
+        [HL+byte]       based register indirect addressing
+        [HL,byte]
+        [HL+B]
+        [HL,B]
+        [HL+C]
+        [HL,C]
+
+        [HL].bit        register indirect addressing
+                        with bit addressing
+
+
+   The  terms  addr16,  addr11,  addr5,  saddr, sfr, bit, label,
+byte, and word may all be expressions.  
+
+   Absolute  addresses  (CONSTANTS)  will be checked as being in
+the 'saddr' range first and then as being in the 'sfr' range  if
+no explicit @ or * is specified.  
+
+   The  bit addressing modes *sfr.bit and @saddr.bit use the '.'
+as a seperator from the address and  the  bit  value.   The  bit
+value  can  be  a numeric constant, a named constant, an expres-
+sion, or a combination of these.  Because the '.' is also a  le-
+gal  character  in a name or label the assembler may not be able
+to resolve the address and bit value.  The  optional  method  of
+using a ',' to seperate the address and bit value may be used in
+this case.  
+
+   If  the 'sfr' or 'saddr' address is external then the user is
+responsible to ensure the addresses are in  the  proper  ranges.
+Paging ERRORS for 'sfr' may be reported by the linker.  
+
+   Note  that  not all addressing modes are valid with every in-
+struction, refer to the 78K/0 technical data for valid modes.  
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+Inherent Instructions 
+
+        nop     halt    stop
+        ret     retb    reti
+        di      ei      brk
+        adjba   adjbs
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+Branch Instructions 
+
+        bc      label                   bnc     label
+        bz      label                   bnz     label
+
+        br      []                      dbnz    [],addr16
+
+        bt      [],addr16               bf      [],addr16
+        btclr   [],addr16
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+Single Operand Instructions 
+
+        inc     []                      dec     []
+        incw    rpn                     dec     rpn
+
+        set1    []                      clr1    []
+
+        set1    cy                      clr1    cy
+        not1    cy
+
+        ror4    [HL]                    rol4    [HL]
+
+        call    addr16                  callt   [addr5]
+        callf   addr11
+
+        mulu    x                       divuw   c
+
+        push    []                      pop     []
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+Double Operand Instructions 
+
+        movw    sp,ax                   movw    ax,sp
+        movw    [],[]                   xchw    ax,rpn
+
+        add     a,[]                    add     saddr,#byte
+        addc    a,[]                    addc    saddr,#byte
+        sub     a,[]                    sub     saddr,#byte
+        subc    a,[]                    subc    saddr,#byte
+        and     a,[]                    and     saddr,#byte
+        or      a,[]                    or      saddr,#byte
+        xor     a,[]                    xor     saddr,#byte
+        cmp     a,[]                    cmp     saddr,#byte
+
+        mov1    cy,[]                   mov1    [],cy
+        and1    cy,[]                   and1    [],cy
+        or1     cy,[]                   or1     [],cy
+        xor1    cy,[]                   xor1    [],cy
+
+        adddw   ax,#word                subw    ax,#word
+        cmpw    ax,#word
+        
+                ror     a,1                     rol     a,1
+                rorc    a,1                     rolc    a,1
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H5><A HREF="asxdoc.htm#TOP"> Go to the Documentation Index</A></H5>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4>
+<P><A HREF="asxxxx.htm#JUMP">
+<IMG width=32 height=32 border=0 SRC="spcshp.gif" ALIGN=bottom></A>
+<B>...  Exit the ASxxxx Documentation</B></A></P>
+
+<P><A href="../home.htm">
+<IMG width=32 height=32 border=0 SRC="home.gif" ALIGN=bottom></A>
+<B>...  Home Page</B></P>
+</H4>
+
+<H6><P><B>Last Updated: January 2019</B></P></H6>
+</BODY> 
+</HTML>

@@ -1,0 +1,6 @@
+-smxu
+LibTest
+-k .\bin\
+-l lib_a
+-l lib_b
+-e

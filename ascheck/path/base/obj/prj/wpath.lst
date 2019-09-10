@@ -1,0 +1,51 @@
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 1
+Hexadecimal [16-Bits]                                 Mon Jan 09 08:12:58 2017
+Dos/Win Path Tests
+
+
+                              1 	.title	Dos/Win Path Tests
+                              2 
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 2
+Hexadecimal [16-Bits]                                 Mon Jan 09 08:12:58 2017
+Dos/Win Path Tests
+
+
+                              3 	.include	"inc1.asm"
+                              1 	.sbttl	Macro File
+                              2 
+   0000 69 6E 63 31 2E 61     3 	.ascii	"inc1.asm"
+        73 6D
+                              4 
+                              5 	.end
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 3
+Hexadecimal [16-Bits]                                 Mon Jan 09 08:12:58 2017
+Dos/Win Path Tests
+Macro File
+
+                              4 	.include	"src\macros\inc2.asm"
+                              1 	.sbttl	Macro File
+                              2 
+   0008 69 6E 63 32 2E 61     3 	.ascii	"inc2.asm"
+        73 6D
+                              4 
+                              5 	.end
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 4
+Hexadecimal [16-Bits]                                 Mon Jan 09 08:12:58 2017
+Dos/Win Path Tests
+Macro File
+
+                              5 	.include	"..\macros\inc3.asm"
+                              1 	.sbttl	Macro File
+                              2 
+   0010 69 6E 63 33 2E 61     3 	.ascii	"inc3.asm"
+        73 6D
+                              4 
+                              5 	.end
+ASxxxx Assembler V05.20  (ASxxxx Test Assembler)                        Page 5
+Hexadecimal [16-Bits]                                 Mon Jan 09 08:12:58 2017
+Dos/Win Path Tests
+Macro File
+
+                              6 
+                              7 	.end
+                              8 

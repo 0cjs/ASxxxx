@@ -1,0 +1,656 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#C0C0C0">
+
+<A href="../home.htm">
+<IMG width=343 height=58 border=0 SRC="welcom.gif" ALT = "Welcome"></A>
+
+<H2>ASZ280  Assembler</H2>
+
+<A NAME = "TOP"> </A> 
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+
+<H4><B><PRE>
+ACKNOWLEDGMENT 
+
+
+     The ASZ280 cross assembler was written by John Coffman.  
+
+        John Coffman
+        johninsd at gmail dot com
+
+
+     The  ASZ280  assembler  is a completely table driven assem-
+bler.   This  assembler  can  process  Z280  (default),  HD64180
+(Z180),  and  Z80 code.  The following processor specific assem-
+bler directives specify  which  processor  to  target  and  with
+specific instruction options when processing the input assembler
+files.  
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+PROCESSOR SPECIFIC DIRECTIVES
+
+.z80 Directive 
+
+Format:  
+
+        .z80 
+
+The  .z80  directive  enables  processing  of  the  Z80 specific
+mnemonics.  Z180 (HD64180) and Z280 mnemonics  will  be  flagged
+with  an  &lto&gt  error.  Addressing modes not supported by the z80
+will be flagged with an &lta&gt error.  
+
+     The  .z80  directive  also  selects the Z80 specific cycles
+count to be output.  
+
+
+.z80u Directive 
+
+Format:  
+
+        .z80u 
+
+The  .z80u  directive enables processing of the Z80 specific and
+Z80 undocumented instructions.  Z180 (HD64180) and Z280  mnemon-
+ics  will  be  flagged  with an &lto&gt error.  Addressing modes not
+supported by the z80 will be flagged with an &lta&gt error.  
+
+     The  .z80u  directive  also selects the Z80 specific cycles
+count to be output.  
+
+
+.z180 Directive 
+
+Format:  
+
+        .z180 
+
+The  .z180  directive  enables  processing  of the Z180 specific
+mnemonics not included in the Z80 instruction  set.   Addressing
+modes  not supported by the Z180 will be flagged with an &lta&gt er-
+ror.  A synonym of .z180 is .hd64.  
+
+     The  .z180/.hd64  directive  also  selects the Z180/HD64180
+specific cycles count to be output.  
+
+
+.z280 Directive 
+
+Format:  
+
+        .z280 
+
+The  .z280  directive  enables  processing  of the Z280 specific
+mnemonics,  includes  i/o   instructions,   but   excludes   all
+privileged  instructions.  Addressing modes not supported by the
+Z280 will be flagged with an &lta&gt error.  
+
+     The  .z280  directive also selects the Z280 specific cycles
+count to be output.  
+
+
+.z280n Directive 
+
+Format:  
+
+        .z280n 
+
+The  .z280n  directive  enables  processing of the Z280 specific
+mnemonics,  excludes  i/o   instructions,   and   excludes   all
+privileged  instructions.  Addressing modes not supported by the
+Z280 will be flagged with an &lta&gt error.  
+
+     The  .z280n directive also selects the Z280 specific cycles
+count to be output.  
+
+
+.z280p Directive 
+
+Format:  
+
+        .z280p 
+
+The  .z280p  directive  enables  processing of the Z280 specific
+mnemonics,  includes  i/o   instructions,   and   includes   all
+privileged  instructions.  Addressing modes not supported by the
+Z280 will be flagged with an &lta&gt error.  
+
+     The  .z280p directive also selects the Z280 specific cycles
+count to be output.  
+
+
+The .__.CPU.  Variable 
+
+The  value  of  the pre-defined symbol '.__.CPU.' corresponds to
+the selected processor type.  The following table lists the pro-
+cessor types and associated values for the ASZ280 assembler:  
+
+        Processor Type            .__.CPU. Value
+        --------------            --------------
+            .z80                        0x83
+            .z80u                       0x87
+            .z180/.hd64                 0x8B
+            .z280                       0x33
+            .z280n                      0x11
+            .z280p                      0xF3
+
+
+     The  variable '.__.CPU.' is by default defined as local and
+will not be output to the created .rel file.  The assembler com-
+mand line options -g or -a will not cause the local symbol to be
+output to the created .rel file.  
+
+     The  assembler  .globl  directive may be used to change the
+variable type to global causing its definition to be  output  to
+the  .rel file.  The inclusion of the definition of the variable
+'.__.CPU.' might be a useful means of validating that seperately
+assembled  files have been compiled for the same processor type.
+The linker will report an error for variables with multiple  non
+equal definitions.  
+
+
+Z280 ADDRESSING AND INSTRUCTIONS
+
+
+   The following is a complete list of register designations and
+condition mnemonics:  
+
+        byte registers  -       a,b,c,d,e,h,l,i,r
+        register pairs  -       af,af',bc,de,hl
+        word registers  -       pc,sp,ix,iy
+
+        C -     carry bit set
+        M -     sign bit set
+        NC -    carry bit clear
+        NZ -    zero bit clear
+        P -     sign bit clear
+        PE -    parity even
+        PO -    parity odd
+        Z -     zero bit set
+
+
+     The  instruction  format  arguments  are  described in this
+table.  Note that not all addressing  arguments  are  valid  for
+every mode, refer to the z280 technical data for valid operands.
+
+ Argument Formats
+ -----------------------------------------------------
+ A,B,C,D,E,H,L,AF,AF'   Explicit 8-Bit Register
+
+ BC,DE,HL,IX,IY,SP,PC   Explicit 16-Bit Register
+
+ DEHL                   Explicit 32-Bit Register
+
+ r                      A,B,C,D,E,H,L Register
+
+ rr                     BC, DE, or HL Register
+
+ src                    Any Valid Source Argument
+                        (Instruction Dependent)
+
+ dst                    Any Valid Destination Argument
+                        (Instruction Dependent)
+
+ n                      Byte Argument
+
+ nn                     Word Argument
+
+ XY                     IX or IY Register
+
+ XX                     HL, IX, or IY Register
+
+ cc                     Condition Codes
+
+ dat                    RST Number       0 &lt= dat &lt= 7
+
+ p                      IM Interrupt Mode  0 &lt= p &lt= 3
+ -----------------------------------------------------
+
+
+8-Bit Load Group Instructions  - 
+                     Addressing Modes Available
+ Format         R   RX  IM  IR  DA  X   SX  RA  SR  BX
+ ------        --- --- --- --- --- --- --- --- --- ---
+ EX A,src       *   *       *   *   *   *   *   *   *
+ EX H,L
+ LD A,src       *   *   *   *   *   *   *   *   *   *
+ LD dst,A       *   *   *   *   *   *   *   *   *   *
+ LD dst,n       *   *       *   *   *   *   *   *   *
+ -----------------------------------------------------
+ LD r,src       *   *   *   *           *
+ LD dst,r       *   *       *           *
+ LDUD A,src                 *           *
+ LDUD dst,A                 *           *
+ LDUP A,src                 *           *
+ LDUP dst,A                 *           *
+ EXTS A
+ -----------------------------------------------------
+
+
+16-Bit Load and Exchange Group Instructions  - 
+                     Addressing Modes Available
+ Format           R   IM  IR  DA  X   SX  RA  SR  BX
+ ------          --- --- --- --- --- --- --- --- ---
+ EX DE,HL
+ EX XY,HL
+ EX (SP),XX
+ EX AF,AF'
+ EXX
+ -----------------------------------------------------
+ LD XX,src            *       *   *       *   *   *
+ LD dst,XX                    *   *       *   *   *
+ LD RR,src            *   *   *       *
+ LD dst,RR                *   *       *
+ LD dst,nn        *       *   *           *
+ -----------------------------------------------------
+ LD SP,src        *   *   *   *       *
+ LD dst,SP                *   *       *
+ LDA XX,src                   *   *       *   *   *
+ POP dst          *       *   *           *
+ PUSH src         *   *   *   *           *
+ -----------------------------------------------------
+
+
+Block Transfer and Search Group Instructions  - 
+ Format                         Format
+ ------                         ------
+ CPD                            LDD
+ CPDR                           LDDR
+ CPI                            LDI
+ CPIR                           LDIR
+ -----------------------------------------------------
+
+
+8-Bit Arithmetic and Logic Group  - 
+                     Addressing Modes Available
+ Format         R   RX  IM  IR  DA  X   SX  RA  SR  BX
+ ------        --- --- --- --- --- --- --- --- --- ---
+ ADC A,src      *   *   *   *   *   *   *   *   *   *
+ ADD A,src      *   *   *   *   *   *   *   *   *   *
+ AND A,src      *   *   *   *   *   *   *   *   *   *
+ CP A,src       *   *   *   *   *   *   *   *   *   *
+ CPL A
+ DAA A
+ -----------------------------------------------------
+ DEC dst        *   *       *   *   *   *   *   *   *
+ DIV A,src      *   *   *       *   *   *   *   *   *
+ DIVU A,src     *   *   *       *   *   *   *   *   *
+ EXTS A
+ INC dst        *   *       *   *   *   *   *   *   *
+ MULT A,src     *   *   *   *   *   *   *   *   *   *
+ -----------------------------------------------------
+ MULTU A,src    *   *   *   *   *   *   *   *   *   *
+ NEG A
+ OR A,src       *   *   *   *   *   *   *   *   *   *
+ SBC A,src      *   *   *   *   *   *   *   *   *   *
+ SUB A,src      *   *   *   *   *   *   *   *   *   *
+ XOR A,src      *   *   *   *   *   *   *   *   *   *
+ -----------------------------------------------------
+
+
+16-Bit Arithmetic Operation Instructions  - 
+                     Addressing Modes Available
+ Format                 R   IM  IR  DA  X   RA
+ ------                --- --- --- --- --- ---
+ ADC XX,src             *
+ ADD XX,src             *
+ AND XX,A
+ ADDW HL,src            *   *       *   *   *
+ CPW HL,src             *   *       *   *   *
+ -----------------------------------------------------
+ DECW dst               *       *   *   *   *
+ DIV DEHL,src           *   *       *   *   *
+ DIVU DEHL,src          *   *       *   *   *
+ EXTS HL
+ INCW dst               *       *   *   *   *
+ -----------------------------------------------------
+ MULT HL,src            *   *       *   *   *
+ MULTU HL,src           *   *       *   *   *
+ NEG HL
+ SBC XX,src             *
+ SUBW HL,src            *   *       *   *   *
+ -----------------------------------------------------
+
+
+Bit Manipulation, Rotate and Shift Group  - 
+                     Addressing Modes Available
+ Format                     IR  DA  RA
+ ------                    --- --- ---
+ BIT dst                    *   *   *
+ RES dst                    *   *   *
+ RL dst                     *   *   *
+ RLA
+ RLC dst                    *   *   *
+ RLCA        
+ -----------------------------------------------------
+ RLD                            *
+ RR dst                     *   *   *
+ RR A
+ RRC dst                    *   *   *
+ RRCA
+ RRD                            *
+ -----------------------------------------------------
+ SET dst                    *   *   * 
+ SLA dst                    *   *   * 
+ SRA dst                    *   *   * 
+ SRL dst                    *   *   * 
+ TSET dst                   *   *   * 
+ -----------------------------------------------------
+
+
+Program Control Group Instructions  - 
+                     Addressing Modes Available
+ Format                     IR  DA  RA
+ ------                    --- --- ---
+ CALL cc,dst                *   *   *
+ CCF
+ DJNZ dst                           *
+ JAF dst                            *
+ JAR dst                            *
+ -----------------------------------------------------
+ JP cc,dst                  *   *   *
+ JR cc,dst                          *
+ RET cc
+ RST dat
+ SC nn
+ SCF
+ -----------------------------------------------------
+
+
+Program Control Group Instructions  - 
+ Format                         Format
+ ------                         ------
+ IN dst,(C)                     OUT (C),src
+ IN A,(n)                       OUT (n),A
+ INW HL,(C)                     OUTW (C),HL
+ IND                            OUTD
+ INDW                           OUTDW
+ INDR                           OTDR
+ INDRW                          OTDRW
+ INI                            OUTI
+ INIW                           OTIW
+ INIR                           OTIR
+ INIRW                          OTIRW
+ TSTI (C)
+ -----------------------------------------------------
+
+
+CPU Control Group Instructions  - 
+ Format                         Format
+ ------                         ------
+ DI mask                        LDCTL dst,src
+ EI mask                        NOP
+ HALT                           PCACHE
+ IM p                           RETI
+ LD A,src                       RETIL
+ LD src,A                       RETN
+ -----------------------------------------------------
+
+
+Extended Instructions  - 
+ Format                         Format
+ ------                         ------
+ EPUM src                       EPUF
+ MEPU dst                       EPUI
+ -----------------------------------------------------
+
+
+Z280 Excution Cycles 
+
+
+     The  instruction  cycle timing was taken from Appendix E of
+the Z280 CPU manual.  They are greatly influenced  by  the  con-
+tents of the cache.  
+
+
+                 Z280 Manual Appendix E Excerpt
+
+     The  autonomous  operation  of the three stages in the
+     Z280 cpu instruction pipeline makes  it  difficult  to
+     calculate exact instruction execution times.  Further-
+     more, execution times are affected by cache  activity;
+     the current cache contents determine the number of ex-
+     ternal memory transactions made during the fetch  exe-
+     cution of a given instruction.  
+
+
+
+     Thus  all timings are approximate and should be looked upon
+as the smallest number of cycles.  
+
+
+Z80/HD64180 ADDRESSING AND INSTRUCTIONS 
+
+
+     The   following   list   specifies   the  format  for  each
+Z80/HD64180 addressing mode supported by ASZ280:  
+
+        #data           immediate data
+                        byte or word data
+        n               byte value
+        rg              a byte register
+                        a,b,c,d,e,h,l
+        rp              a register pair
+                        bc,de,hl
+        (hl)            implied addressing or
+                        register indirect addressing
+        (label)         direct addressing
+        (ix+offset)     indexed addressing with
+         offset(ix)     an offset
+        label           call/jmp/jr label
+
+The  terms  data,  n, label, and offset, may all be expressions.
+The terms dir and offset are not allowed to be  external  refer-
+ences.   The  following  tables  list  all Z80/HD64180 mnemonics
+recognized by the ASRAB assembler.  The designation [] refers to
+a required addressing mode argument.  
+
+     Note that not all addressing modes are valid with every in-
+struction, refer to the Z80/HD64180  technical  data  for  valid
+modes.  
+
+
+Inherent Instructions 
+
+        ccf             cpd
+        cpdr            cpi
+        cpir            cpl
+        daa             di
+        ei              exx
+        halt            neg
+        nop             reti
+        retn            rla
+        rlca            rld
+        rra             rrca
+        rrd             scf
+
+
+Implicit Operand Instructions 
+
+        adc     a,[]            adc     []
+        add     a,[]            add     []
+        and     a,[]            and     []
+        cp      a,[]            cp      []
+        dec     a,[]            dec     []
+        inc     a,[]            inc     []
+        or      a,[]            or      []
+        rl      a,[]            rl      []
+        rlc     a,[]            rlc     []
+        rr      a,[]            rr      []
+        rrc     a,[]            rrc     []
+        sbc     a,[]            sbc     []
+        sla     a,[]            sla     []
+        sra     a,[]            sra     []
+        srl     a,[]            srl     []
+        sub     a,[]            sub     []
+        xor     a,[]            xor     []
+
+
+Load Instruction 
+
+        ld      rg,[]           ld      [],rg
+        ld      (bc),a          ld      a,(bc)
+        ld      (de),a          ld      a,(de)
+        ld      (label),a       ld      a,(label)
+        ld      (label),rp      ld      rp,(label)
+        ld      i,a             ld      r,a
+        ld      a,i             ld      a,r
+        ld      sp,hl           ld      sp,ix
+        ld      sp,iy           ld      rp,#data
+
+        ldd                     lddr
+        ldi                     ldir
+
+
+Call/Return Instructions 
+
+        call    C,label         ret     C
+        call    M,label         ret     M
+        call    NC,label        ret     NC
+        call    NZ,label        ret     NZ
+        call    P,label         ret     P
+        call    PE,label        ret     PE
+        call    PO,label        ret     PO
+        call    Z,label         ret     Z
+        call    label           ret
+
+
+Jump and Jump to Subroutine Instructions 
+
+        jp      C,label         jp      M,label
+        jp      NC,label        jp      NZ,label
+        jp      P,label         jp      PE,label
+        jp      PO,label        jp      Z,label
+
+        jp      (hl)            jp      (ix)
+        jp      (iy)            jp      label
+
+        djnz    label
+
+        jr      C,label         jr      NC,label
+        jr      NZ,label        jr      Z,label
+        jr      label
+
+
+Bit Manipulation Instructions 
+
+        bit     n,[]
+        res     n,[]
+        set     n,[]
+
+
+Interrupt Mode and Reset Instructions 
+
+        im      n
+        im      n
+        im      n
+        rst     n
+
+
+Input and Output Instructions 
+
+        in      a,(n)           in      rg,(c)
+        ind                     indr
+        ini                     inir
+
+        out     (n),a           out     (c),rg
+        outd                    otdr
+        outi                    otir
+
+
+Register Pair Instructions 
+
+        add     hl,rp           add     ix,rp
+        add     iy,rp
+
+        adc     hl,rp           sbc     hl,rp
+
+        ex      (sp),hl         ex      (sp),ix
+        ex      (sp),iy
+        ex      de,hl
+        ex      af,af'
+
+        push    rp              pop     rp
+
+
+HD64180 Specific Instructions 
+
+        in0     rg,(n)
+        out0    (n),rg
+
+        otdm                    otdmr
+        otim                    otimr
+
+        mlt     bc              mlt     de
+        mlt     hl              mlt     sp
+
+        slp
+
+        tst     a
+        tstio   #data
+
+
+Z80 Undocumented Instructions 
+
+    op = adc, add, and, cp, or, sbc, sub, xor
+        op      a,ixh           op      a,ixl
+        op      a,iyh           or      a,iyl
+
+    op = dec, inc
+        op      ixh             inc     ixl
+        op      iyh             inc     iyl
+
+        in      ixh,(c)         in      ixl,(c)
+        in      iyh,(c)         in      iyl,(c)
+
+        ld      ixh,r           r = a, b, c, d, e
+        ld      ixl,r           r = a, b, c, d, e
+
+        ld      iyh,r           r = a, b, c, d, e
+        ld      iyl,r           r = a, b, c, d, e
+
+        ld      r,ixh           r = a, b, c, d, e
+        ld      r,ixl           r = a, b, c, d, e
+
+        ld      r,iyh           r = a, b, c, d, e
+        ld      r,iyl           r = a, b, c, d, e
+
+        ld      ixh,#n          ld      ixl,#n
+        ld      iyh,#n          ld      iyl,#n
+
+        ld      ixh,ixh         ld      ixl,ixh
+        ld      ixh,ixl         ld      ixl,ixl
+        ld      iyh,iyh         ld      iyl,iyh
+        ld      iyh,iyl         ld      iyl,iyl
+
+        sll     offset(ix)      sll     offset(iy)
+        sll     a               sll     b
+        sll     c               sll     d
+        sll     e               sll     h
+        sll     l
+</PRE></B></H4>
+<H5><A HREF="asxdoc.htm#TOP"> Go to the Documentation Index</A></H5>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4>
+<P><A HREF="asxxxx.htm#JUMP">
+<IMG width=32 height=32 border=0 SRC="spcshp.gif" ALIGN=bottom></A>
+<B>...  Exit the ASxxxx Documentation</B></A></P>
+
+<P><A href="../home.htm">
+<IMG width=32 height=32 border=0 SRC="home.gif" ALIGN=bottom></A>
+<B>...  Home Page</B></P>
+</H4>
+
+<H6><P><B>Last Updated: January 2019</B></P></H6>
+</BODY> 
+</HTML>

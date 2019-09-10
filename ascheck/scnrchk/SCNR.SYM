@@ -1,0 +1,46 @@
+ASxxxx Assembler V05.06+  (ASxxxx Test Assembler)                       Page 1
+Hexadecimal [16-Bits]                                 Thu Aug 14 08:59:32 2014
+ASXSCN Scanner Testing
+Symbol Table
+
+    .__.$$$.       =   2710 L   |     .__.ABS.       =   0000 G
+    .__.CPU.       =   0000 L   |     .__.H$L.       =   0001 L
+    a              =   0002     |   2 b              =   006D R
+  2 byte0              0044 R   |   2 byte1              0045 R
+  2 byte10             0064 R   |   2 byte11             0064 R
+  2 byte2              0046 R   |   3 byte20             0000 R
+  3 byte21             0001 R   |   3 byte22             0002 R
+  3 byte23             0003 R   |   3 byte24             0004 R
+  3 byte25             0005 R   |   3 byte26             0006 R
+  3 byte27             0007 R   |   3 byte28             0008 R
+  3 byte29             0009 R   |   3 byte2A             000A R
+  3 byte2B             000B R   |   3 byte2C             000C R
+  3 byte2D             000D R   |   3 byte2E             000E R
+  3 byte2F             000F R   |   2 byte3              0047 R
+  3 byte30             0020 R   |   3 byte31             0020 R
+  2 byte4              0048 R   |     byte40             **** GX
+    byte41             **** GX  |   2 byte5              0049 R
+  2 byte6              004A R   |   2 byte7              004B R
+  2 byte8              004C R   |   2 byte9              004D R
+  2 byteA              004E R   |   2 byteB              004F R
+  2 byteC              0050 R   |   2 byteD              0051 R
+  2 byteE              0052 R   |   2 byteF              0053 R
+  2 c              =   008F R   |     cddd           =   0000 
+    cdde           =   0000     |   3 cddf           =   0026 R
+    cddg           =   0002     |   3 cddj           =   0024 R
+  3 code           =   0005 R   |   2 d              =   006F R
+    j              =   0002     |   3 k              =   0028 R
+  3 l              =   004A R   |   3 m              =   002A R
+
+ASxxxx Assembler V05.06+  (ASxxxx Test Assembler)                       Page 2
+Hexadecimal [16-Bits]                                 Thu Aug 14 08:59:32 2014
+ASXSCN Scanner Testing
+Area Table
+
+[_CSEG]
+   0 _CODE            size    0   flags C080
+   2 A                size   6D   flags  D00
+   3 B                size   28   flags  100
+[_DSEG]
+   1 _DATA            size    0   flags C0C0
+

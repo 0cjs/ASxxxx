@@ -1,0 +1,87 @@
+ASxxxx Linker V05.20                                                    Page 1
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+.  .ABS.                   0000        0000 =           0. bytes (ABS,OVR,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    0000  .__.ABS.
+ASxxxx Linker V05.20                                                    Page 2
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+LibTest                    0000        0009 =           9. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+ASxxxx Linker V05.20                                                    Page 3
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+func10                     0009        0006 =           6. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    0009  lfnc10  
+ASxxxx Linker V05.20                                                    Page 4
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+func02                     000F        0003 =           3. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    000F  lfnc02  
+ASxxxx Linker V05.20                                                    Page 5
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+func03                     0012        0006 =           6. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    0012  lfnc03  
+ASxxxx Linker V05.20                                                    Page 6
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+func07                     0018        0006 =           6. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    0018  lfnc07  
+ASxxxx Linker V05.20                                                    Page 7
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Area                       Addr        Size        Decimal Bytes (Attributes)
+--------------------       ----        ----        ------- ----- ------------
+func04                     001E        0003 =           3. bytes (REL,CON,CSEG)
+
+   Value  Global      Value  Global      Value  Global      Value  Global   
+   -----  ------      -----  ------      -----  ------      -----  ------   
+    001E  lfnc04  
+ASxxxx Linker V05.20                                                    Page 8
+Hexadecimal [16-Bits]                                 Mon Apr 09 15:22:42 2018
+
+Files Linked                              [ module(s) ]
+
+LibTest                                   [ LibTest ]
+
+
+Libraries Linked                          [ object file ]
+
+.\bin\lib_b.lib                           [ func10 ]
+.\bin\lib_a.lib                           [ func02 ]
+.\bin\lib_a.lib                           [ func03 ]
+.\bin\lib_b.lib                           [ func07 ]
+.\bin\lib_a.lib                           [ func04 ]
+
+
+

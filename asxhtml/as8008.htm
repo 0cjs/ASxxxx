@@ -1,0 +1,139 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY BGCOLOR="#C0C0C0">
+
+<A href="../home.htm">
+<IMG width=343 height=58 border=0 SRC="welcom.gif" ALT="Welcome"></A>
+
+<H2>AS8008  Assembler</H2>
+
+<A NAME = "TOP"> </A> 
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+   The  AS8008  assembler supports the 8008 microprocessor using
+the traditional MCS-8 assembly language syntax.  
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+8008 REGISTER SET 
+
+The following is a list of the 8008 registers used by AS8008:  
+
+        a               -       8-bit accumulator
+        b,c,d,e,h,l     -       8-bit registers
+
+
+8008 INSTRUCTION ADDRESSING MODES
+
+   The  following  tables  list all 8008 mnemonics recognized by
+the AS8008 assembler.  The following list specifies  the  format
+for each addressing mode supported by AS8008:  
+
+    Instruction Argument Syntax:
+
+        REGM    register a,b,c,d,e,h,l
+                or Memory (address is HL)
+
+        SRC     REGM source
+
+        DST     REGM destination
+
+        #data   immediate byte data
+
+        addr    call or jump address or label
+
+        port    input/output port
+
+        n       reset number
+
+The terms data, addr, port, and n may all be expressions.  
+
+   Note  that  not  all addressing modes may be valid with every
+instruction.  Refer to the 8008 technical data for valid modes. 
+
+</PRE></B></H4>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4><B><PRE>
+8008 INSTRUCTION SET
+
+    Single Register Instructions    REGM != a or M
+        inr     REGM            dcr     REGM
+
+    Mov Instructions    SRC and DST not both = M
+        mov     DST,SRC
+        
+    Register or Memory to Accumulator Instructions
+        add     REGM            adc     REGM
+        sub     REGM            sbb     REGM
+        ana     REGM            xra     REGM
+        ora     REGM            cmp     REGM
+    
+    Rotate Accumulator Instructions
+        rlc                     rrc
+        ral                     rar
+    
+    Immediate Instructions
+        movi    REGM,#data
+        adi     #data           aci     #data
+        sui     #data           sbi     #data
+        ani     #data           xri     #data
+        ori     #data           cpi     #data
+    
+    Jump Instructions
+        jmp     addr
+        jc      addr            jnc     addr
+        jz      addr            jnz     addr
+        jp      addr            jm      addr
+        jpe     addr            jpo     addr
+    
+    Call Instructions
+        call    addr
+        cc      addr            cnc     addr
+        cz      addr            cnz     addr
+        cp      addr            cm      addr
+        cpe     addr            cpo     addr
+    
+    Return Instructions
+        rte
+        rc                      rnc
+        rz                      rnz
+        rp                      rm
+        rpe                     rpo
+    
+    Reset Instruction
+        rst     n       0 &lt= n &lt= 7
+    
+    Input/Output Instructions
+        in      port    0 &lt= port &lt= 7
+        out     port    8 &lt= port &lt= 31
+    
+    Halt and No-Operation Instruction
+        hlt
+        nop
+
+</PRE></B></H4>
+<H5><A HREF="asxdoc.htm#TOP"> Go to the Documentation Index</A></H5>
+
+<IMG width=576 height=5 border=0 SRC="rnbow.gif">
+
+<H4>
+<P><A HREF="asxxxx.htm#JUMP">
+<IMG width=32 height=32 border=0 SRC="spcshp.gif" ALIGN=bottom></A>
+<B>...  Exit the ASxxxx Documentation</B></A></P>
+
+<P><A href="../home.htm">
+<IMG width=32 height=32 border=0 SRC="home.gif" ALIGN=bottom></A>
+<B>...  Home Page</B></P>
+</H4>
+
+<H6><P><B>Last Updated: January 2019</B></P></H6>
+</BODY> 
+</HTML>

@@ -1,0 +1,45 @@
+# Symantec SC++ generated .dpd file. V: 7200
+..\build\asdata.OBJ: \
+	..\..\..\asxxsrc\asdata.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\asdbg.OBJ: \
+	..\..\..\asxxsrc\asdbg.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\asexpr.OBJ: \
+	..\..\..\asxxsrc\asexpr.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\aslex.OBJ: \
+	..\..\..\asxxsrc\aslex.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\aslist.OBJ: \
+	..\..\..\asxxsrc\aslist.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\asmain.OBJ: \
+	..\..\..\asxxsrc\asmain.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\asmcro.OBJ: \
+	..\..\..\asxxsrc\asmcro.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\asout.OBJ: \
+	..\..\..\asxxsrc\asout.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\assubr.OBJ: \
+	..\..\..\asxxsrc\assubr.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\assym.OBJ: \
+	..\..\..\asxxsrc\assym.c \
+	..\..\..\ASXXSRC\asxxxx.h 
+..\build\z280adr.OBJ: \
+	..\..\..\asz280\z280adr.c \
+	..\..\..\asxxsrc\asxxxx.h \
+	..\..\..\ASZ280\z280def.h 
+..\build\z280mch.OBJ: \
+	..\..\..\asz280\z280mch.c \
+	..\..\..\asxxsrc\asxxxx.h \
+	..\..\..\ASZ280\z280def.h \
+	..\..\..\ASZ280\z280opcy.h \
+	..\..\..\ASZ280\z280ops.h 
+..\build\z280pst.OBJ: \
+	..\..\..\asz280\z280pst.c \
+	..\..\..\asxxsrc\asxxxx.h \
+	..\..\..\ASZ280\z280def.h 
